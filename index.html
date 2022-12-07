@@ -33,11 +33,9 @@
                 <a id="timerSec">0</a><span>s</span>
             </div>
             <div id="Input" class="timer">
-                <input type="number" placeholder="00" maxlength="2" value=0 id="hourInput" /><span
-                    id="timerHourIcon">h</span>
-                <input type="number" placeholder="00" maxlength="2" value=5 id="minsInput" /><span
-                    id="timerMinIcon">m</span>
-                <input type="number" placeholder="00" maxlength="2" value=0 id="secInput" /><span>s</span>
+                <input type="number" placeholder="00" maxlength="2" id="hourInput" /><span id="timerHourIcon">h</span>
+                <input type="number" placeholder="00" maxlength="2" id="minsInput" /><span id="timerMinIcon">m</span>
+                <input type="number" placeholder="00" maxlength="2" id="secInput" /><span>s</span>
             </div>
             <div id="stopwatchView" class="stopwatch"><a id="stopwatchSec">0</a><span>s</span> <span
                     id="stopwatchMicroSec">00</span>
@@ -46,6 +44,7 @@
         <div class="controller">
             <div>
                 <button id="startBtn">start</button>
+                <button id="stopBtn" style="display: none;">stop</button>
                 <button id="resetBtn">reset</button>
             </div>
             <div style="display: flex; flex-direction: row-reverse;">

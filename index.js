@@ -1,8 +1,8 @@
 const timerTabBtn = document.getElementById("timerTabConatiner")
 const timerView = document.getElementById("timerView")
 const startBtn = document.getElementById("startBtn")
+const stopBtn = document.getElementById("stopBtn")
 const resetBtn = document.getElementById("resetBtn")
-
 
 const speaker = document.getElementById("speaker")
 const stopwatchTabBtn = document.getElementById("stopwatchTabConatiner")
@@ -25,17 +25,21 @@ const hourInput = document.getElementById("hourInput")
 const minsInput = document.getElementById("minsInput")
 const secInput = document.getElementById("secInput")
 
+var loopFlag = 0
+
+
 InputView.style.display = 'none'
 
 
-/**
- * id="hourInput" 
- * id="minsInput"
- * id="secInput" /
- */
 
+function reset() {
+    loopFlag = false;
+    secInput.value = 0
+    minsInput.value = 5
+    hourInput.value = 0
 
-
+}
+reset()
 function checkEmptyInputs() {
     if ((0 == timerHour.innerText || "" == timerHour.innerText)) {
         timerHour.style.display = "none";
@@ -71,6 +75,10 @@ function timerMode() {
 function clickedBtn(i) {
 
     InputView.style.display = 'none'
+    startBtn.style.display = 'inline'
+    stopBtn.style.display = 'none'
+    loopFlag = false;
+    reset()
     if (i) {
         timerTabBtn.style.borderBottomColor = '#89b4f8'
         timerTabBtn.style.color = '#89b4f8'
@@ -94,47 +102,64 @@ function clickedBtn(i) {
     }
 }
 
-
 function finish() {
-    console.log("HI");
+    clearTimeout(timerLoop)
 }
 function start() {
-    if (startBtn.innerText === "START") {
-        var hours = hourInput.value,
-            mins = minsInput.value,
-            secs = secInput.value;
+    loopFlag = true;
+
+    stopBtn.style.display = 'inline'
+    startBtn.style.display = 'none'
 
 
-        const secondUnit = 1000,
-            minutsUnit = secondUnit * 60,
-            hourUnit = minutsUnit * 60;
+    const secondUnit = 1000,
+        minutsUnit = secondUnit * 60,
+        hourUnit = minutsUnit * 60;
 
-        timerHour.innerText = hourInput.value
-        timerMin.innerText = minsInput.value
-        timerSec.innerText = secInput.value
+    // var hours = hourInput.value,
+    //     mins = minsInput.value,
+    //     secs = secInput.value;
 
-        const timeDur = (secs * secondUnit) + (mins * minutsUnit) + (hourUnit * hours)
-        console.log(timeDur);
-        setTimeout(_ => { finish() }, timeDur)
+    let timeBySec = (secInput.value)
+    let timeByMin = (minsInput.value)
+    let timeByHour = (hourInput.value)
 
 
-
-        timerMode()
-        checkEmptyInputs()
-
-        startBtn.innerText = "stop"
-    } else {
-        timerMode()
-        checkEmptyInputs()
-        startBtn.innerText = "START"
+    function changeHours() {
+        (timeByHour != 0) ? (timeByHour = --timeByHour, timeByMin += 59) : (reset());
+        timerHour.innerText = (timeByHour)
     }
+
+    function changeMins() {
+        (timeByMin != 0) ? (timeByMin = --timeByMin, timeBySec += 59) : (changeHours());
+        timerMin.innerText = (timeByMin)
+    }
+
+
+    function changeSecs() {
+        if (loopFlag) {
+            (timeBySec != 0) ? (timeBySec = --timeBySec) : (changeMins());
+            timerSec.innerText = (timeBySec)
+            timerMin.innerText = (timeByMin)
+            timerHour.innerText = (timeByHour)
+
+        }
+    }
+    changeSecs()
+
+    var timerLoop = setInterval(() => changeSecs(), secondUnit)
+    timerLoop
+
+    timerMode()
+    checkEmptyInputs()
+
+
 }
+function stop() {
+    startBtn.style.display = 'inline'
+    stopBtn.style.display = 'none'
 
-function reset() {
-
-    timerHour.innerText = 0
-    timerMin.innerText = 5
-    timerSec.innerText = 0
+    loopFlag = false;
 }
 
 
@@ -148,4 +173,5 @@ stopwatchTabBtn.onclick = _ => { clickedBtn(false) }
 timerView.onclick = _ => { inputMode() }
 
 startBtn.onclick = _ => { start() }
+stopBtn.onclick = _ => { stop() }
 resetBtn.onclick = _ => { reset() }
