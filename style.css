@@ -1,0 +1,165 @@
+ * {
+     --main-background-color: #202125;
+     --main-border-color: #979aa140;
+     --avtice-color: #89b4f8;
+     user-select: none;
+ }
+
+ @font-face {
+     font-family: Tajawal;
+     src: url('./assist/fonts/Tajawal-Regular.ttf');
+ }
+
+
+ body {
+     background-color: var(--main-background-color);
+     display: flex;
+     justify-content: center;
+     align-items: center;
+     color: #979aa1;
+     font-family: Tajawal;
+     border-width: thin;
+ }
+
+ .timerConatiner {
+     background-color: inherit;
+     height: 270px;
+     width: 650px;
+     border: 1px solid var(--main-border-color);
+     border-radius: 10px;
+ }
+
+ .tabConatiner {
+     display: grid;
+     grid-template-columns: 1fr 1fr;
+     background-color: inherit;
+     height: 50px;
+     width: inherit;
+     border-bottom: 1px solid var(--main-border-color);
+     border-top-left-radius: 10px;
+     border-top-right-radius: 10px;
+ }
+
+ .tabConatiner>div {
+     display: flex;
+     font-size: 15px;
+     justify-content: center;
+     height: 49px;
+     align-items: center;
+     cursor: pointer;
+     border-bottom: 2px solid #00000000;
+     text-transform: uppercase;
+ }
+
+ /* 
+ #timerTabConatiner {
+     border-bottom: 2px solid var(--avtice-color);
+ } */
+
+ .tabConatiner>div:hover {
+     color: white !important;
+ }
+
+ .tabConatiner>div>span {
+     margin-right: 5px;
+     font-size: 15px;
+ }
+
+ .timeDisplay {
+     display: flex;
+     width: inherit;
+     background-color: inherit;
+     border-bottom: 1px solid var(--main-border-color);
+     height: 170px;
+     justify-content: left;
+     align-items: center;
+     cursor: pointer;
+ }
+
+ .timer,
+ .stopwatch {
+     /* background-color: wheat; */
+     color: white;
+     text-align: center;
+     width: fit-content;
+     padding: 0px 15px;
+     height: 100px;
+     padding-top: 18px;
+     margin-left: 20px;
+     font-size: 64px;
+     border-bottom: 1px solid var(--main-border-color);
+
+ }
+
+ .stopwatch {
+     margin-left: -5px;
+     border: none;
+     width: 200px;
+ }
+
+ .timer>span,
+ .stopwatch>span {
+     font-size: 30px;
+     font-weight: bold;
+ }
+
+ .controller {
+     display: flex;
+     align-items: center;
+     justify-content: space-between;
+     padding: 0px 20px;
+     height: 45px;
+ }
+
+ .controller>div {
+     width: 25%;
+     display: flex;
+     align-items: center;
+     justify-content: space-between;
+ }
+
+ .controller>div:nth-of-type(2) {
+     width: 13%;
+ }
+
+ button {
+     width: 70px;
+     height: 30px;
+     text-transform: uppercase;
+     font-weight: bold;
+     font-size: 11px;
+     border: 1px solid #00000000;
+     cursor: pointer;
+     border-radius: 2px;
+ }
+
+ button:nth-of-type(1) {
+     background-color: var(--avtice-color);
+ }
+
+ button:nth-of-type(2) {
+     background-color: #bdc0c5;
+ }
+
+ input::-webkit-outer-spin-button,
+ input::-webkit-inner-spin-button {
+     /* display: none; <- Crashes Chrome on hover */
+     -webkit-appearance: none;
+     margin: 0;
+     /* <-- Apparently some margin are still there even though it's hidden */
+ }
+
+ #Input>span {
+     color: gray;
+ }
+
+ input[type="number"] {
+     font-size: 64px;
+     background-color: inherit;
+     outline: none;
+     color: white;
+     width: 70px;
+     -moz-appearance: textfield;
+     border: none;
+     text-align: right;
+ }
