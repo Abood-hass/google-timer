@@ -1,6 +1,7 @@
 const timerTabBtn = document.getElementById("timerTabConatiner")
 const timerView = document.getElementById("timerView")
 const startBtn = document.getElementById("startBtn")
+const stopwatchBtn = document.getElementById("stopwatchBtn")
 const stopBtn = document.getElementById("stopBtn")
 const resetBtn = document.getElementById("resetBtn")
 
@@ -15,7 +16,6 @@ const timerHourIcon = document.getElementById("timerHourIcon")
 const timerMin = document.getElementById("timerMin")
 const timerMinIcon = document.getElementById("timerMinIcon")
 
-
 const timerSec = document.getElementById("timerSec")
 
 
@@ -25,11 +25,20 @@ const hourInput = document.getElementById("hourInput")
 const minsInput = document.getElementById("minsInput")
 const secInput = document.getElementById("secInput")
 
+const stopwatchStart = document.getElementById("stopwatchStart")
+
+const stopWatchHour = document.getElementById("stopWatchHour")
+const stopWatchMin = document.getElementById("stopWatchMin")
+const stopWatchSec = document.getElementById("stopWatchSec")
+
+const stopWatchHourIcon = document.getElementById("stopWatchHourIcon")
+const stopWatchMinIcon = document.getElementById("stopWatchMinIcon")
+
 var loopFlag = 0
 
 
 InputView.style.display = 'none'
-
+stopwatchStart.style.display = 'none'
 
 
 function reset() {
@@ -41,6 +50,7 @@ function reset() {
 }
 reset()
 function checkEmptyInputs() {
+
     if ((0 == timerHour.innerText || "" == timerHour.innerText)) {
         timerHour.style.display = "none";
         timerHourIcon.style.display = "none";
@@ -60,7 +70,41 @@ function checkEmptyInputs() {
 
 }
 
+function checkEmptyStopWatch() {
 
+    if ((0 == stopWatchHour.innerText || "" == stopWatchHour.innerText)) {
+        stopWatchHour.style.display = "none";
+        stopWatchHourIcon.style.display = "none";
+        0 == stopWatchHour.innerText
+
+        if (0 == stopWatchMin.innerText || "" == stopWatchMin.innerText) {
+            stopWatchMin.style.display = "none";
+            stopWatchMinIcon.style.display = "none";
+            0 == stopWatchMin.innerText
+
+            if (0 == stopWatchSec.innerText || "" == stopWatchSec.innerText) {
+                stopWatchSec.innerText = 0
+            }
+        }
+    }
+
+}
+function startStopWatch() {
+
+    function changeTime() {
+        if (stopWatchSec.innerText == 60) {
+            stopWatchMin.innerText = ++stopWatchMin.innerText
+            stopWatchSec.innerText = 0
+            if (stopWatchMin.innerText == 60) {
+                stopWatchHour.innerText = ++stopWatchHour.innerText
+                stopWatchMin.innerText = 0
+            }
+        }
+        stopWatchSec.innerText = ++stopWatchSec.innerText
+        console.log(stopWatchSec.innerText);
+    }
+    setInterval(() => changeTime(), 1000)
+}
 
 function inputMode() {
     timerView.style.display = 'none'
@@ -79,13 +123,15 @@ function clickedBtn(i) {
     stopBtn.style.display = 'none'
     loopFlag = false;
     reset()
+
+
     if (i) {
         timerTabBtn.style.borderBottomColor = '#89b4f8'
         timerTabBtn.style.color = '#89b4f8'
         timerView.style.display = 'inline'
         speaker.style.display = 'inline'
-
-
+        stopwatchStart.style.display = 'none'
+        startBtn.style.display = 'inline'
         stopwatchView.style.display = 'none'
         stopwatchTabBtn.style.borderBottomColor = '#00000000'
         stopwatchTabBtn.style.color = '#979aa1'
@@ -93,7 +139,9 @@ function clickedBtn(i) {
         stopwatchTabBtn.style.borderBottomColor = '#89b4f8'
         stopwatchTabBtn.style.color = '#89b4f8'
         stopwatchView.style.display = 'inline'
-
+        checkEmptyStopWatch()
+        startBtn.style.display = 'none'
+        stopwatchStart.style.display = 'inline'
         speaker.style.display = 'none'
         timerView.style.display = 'none'
         timerTabBtn.style.borderBottomColor = '#00000000'
@@ -155,6 +203,11 @@ function start() {
 
 
 }
+
+
+function startStopwatchBtn() {
+
+}
 function stop() {
     startBtn.style.display = 'inline'
     stopBtn.style.display = 'none'
@@ -175,3 +228,4 @@ timerView.onclick = _ => { inputMode() }
 startBtn.onclick = _ => { start() }
 stopBtn.onclick = _ => { stop() }
 resetBtn.onclick = _ => { reset() }
+stopwatchStart.onclick = _ => { startStopWatch() }

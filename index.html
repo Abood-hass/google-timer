@@ -37,13 +37,16 @@
                 <input type="number" placeholder="00" maxlength="2" id="minsInput" /><span id="timerMinIcon">m</span>
                 <input type="number" placeholder="00" maxlength="2" id="secInput" /><span>s</span>
             </div>
-            <div id="stopwatchView" class="stopwatch"><a id="stopwatchSec">0</a><span>s</span> <span
-                    id="stopwatchMicroSec">00</span>
+            <div id="stopwatchView" class="stopwatch ">
+                <a id="stopWatchHour">0</a><span id="stopWatchHourIcon">h</span>
+                <a id="stopWatchMin">0</a><span id="stopWatchMinIcon">m</span>
+                <a id="stopWatchSec">0</a><span>s</span>
             </div>
         </div>
         <div class="controller">
             <div>
                 <button id="startBtn">start</button>
+                <button id="stopwatchStart">start</button>
                 <button id="stopBtn" style="display: none;">stop</button>
                 <button id="resetBtn">reset</button>
             </div>
